@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using SmartBank.Application.Persistence;
 using SmartBank.Domain.Entities;
 using SmartBank.Domain.Entities.BaseEntity;
 
@@ -11,7 +13,6 @@ namespace SmartBank.Infrastructure.Context
         {
         }
 
-        public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Notification> Notifications { get; set; }
@@ -19,11 +20,14 @@ namespace SmartBank.Infrastructure.Context
         {
             // Apply all configurations from the current assembly
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(BankSmartContext).Assembly);
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Account>().HasKey(a => a.Id);
+            modelBuilder.Entity<Transaction>().HasKey(a => a.Id);
+          
+             base.OnModelCreating(modelBuilder);
         }
         // Define DbSet properties for your entities
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = base.ChangeTracker.Entries<BaseEntity>();
             foreach (var entityEntry in entries.Where(p=>p.State == EntityState.Added || p.State == EntityState.Modified ))
@@ -34,7 +38,7 @@ namespace SmartBank.Infrastructure.Context
                     entityEntry.Entity.CreatedAt = DateTime.UtcNow;
                 }
             }
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
    
     }

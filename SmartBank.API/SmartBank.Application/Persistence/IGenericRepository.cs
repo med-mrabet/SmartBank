@@ -1,7 +1,7 @@
 ﻿
 using SmartBank.Domain.Entities.BaseEntity;
 
-namespace HR.LeaveManagement.Application.Contracts.Persistence;
+namespace SmartBank.Application.Persistence;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {

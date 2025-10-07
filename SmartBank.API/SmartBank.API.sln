@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36401.2 d17.14
+VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBank.Infrastructure", "SmartBank.Infrastructure\SmartBank.Infrastructure.csproj", "{89B38F90-2825-4594-ABDB-61DD2C61B4B4}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBank.API", "SmartBank.API\SmartBank.API.csproj", "{1BB9E9BF-C1D1-45D5-B208-34BE2E5FE9D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBank.Application", "SmartBank.Application\SmartBank.Application.csproj", "{968CE15D-9636-42DE-BEA9-ECB5332BDDDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBank.Shared", "SmartBank.Shared\SmartBank.Shared.csproj", "{65599019-651D-4B36-94DC-96909942307F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBank.Identity", "SmartBank.Identity\SmartBank.Identity.csproj", "{75A6A321-6236-4E29-9ABA-9C8971436D6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{968CE15D-9636-42DE-BEA9-ECB5332BDDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968CE15D-9636-42DE-BEA9-ECB5332BDDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{968CE15D-9636-42DE-BEA9-ECB5332BDDDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65599019-651D-4B36-94DC-96909942307F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65599019-651D-4B36-94DC-96909942307F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65599019-651D-4B36-94DC-96909942307F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65599019-651D-4B36-94DC-96909942307F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A6A321-6236-4E29-9ABA-9C8971436D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A6A321-6236-4E29-9ABA-9C8971436D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A6A321-6236-4E29-9ABA-9C8971436D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A6A321-6236-4E29-9ABA-9C8971436D6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

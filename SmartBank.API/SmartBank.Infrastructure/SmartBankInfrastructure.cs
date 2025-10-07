@@ -1,8 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Identity.Client;
+using SmartBank.Application.Persistence;
 using SmartBank.Infrastructure.Context;
+using SmartBank.Infrastructure.Repositories;
+using SmartBank.Shared.Dtos;
 
 namespace SmartBank.Infrastructure;
 
@@ -15,6 +19,7 @@ public static class SmartBankInfrastructure
 
         services.AddDbContext<BankSmartContext>(opt =>
         opt.UseSqlServer(dbConnString));
+
 
         return services;
     }

@@ -1,4 +1,4 @@
-﻿namespace SmartBank.Application
+﻿namespace SmartBank.Shared
 {
     public class Class1
     {

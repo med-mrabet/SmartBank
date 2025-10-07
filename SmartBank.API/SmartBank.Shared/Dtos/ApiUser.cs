@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartBank.Domain.Entities
+namespace SmartBank.Shared.Dtos
 {
-    public class User : BaseEntity.BaseEntity
+    public class ApiUser
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public DateTime BirthDate { get; set; }
-
+        public string Password { get; set; } = string.Empty;
     }
 }

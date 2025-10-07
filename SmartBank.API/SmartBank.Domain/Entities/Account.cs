@@ -1,4 +1,5 @@
-﻿namespace SmartBank.Domain.Entities
+﻿
+namespace SmartBank.Domain.Entities
 {
     public class Account : BaseEntity.BaseEntity
     {
@@ -6,7 +7,6 @@
         public decimal Balance { get; set; } 
         public string Currency { get; set; } = string.Empty;
         public Guid UserId { get; set; }
-        public User User { get; set; } 
 
     }
 }

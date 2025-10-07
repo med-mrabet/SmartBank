@@ -1,4 +1,5 @@
-﻿using SmartBank.Domain.Enums;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using SmartBank.Domain.Enums;
 
 namespace SmartBank.Domain.Entities
 {
@@ -12,10 +13,8 @@ namespace SmartBank.Domain.Entities
         public DateTime TransactionDate { get; set; }
 
         public Guid? FromAccountId { get; set; }
-        public User? FromAccount { get; set; }
 
         public Guid? ToAccountId { get; set; }
-        public User? ToAccount { get; set; }
 
     }
 }
