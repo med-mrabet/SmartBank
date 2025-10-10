@@ -1,5 +1,5 @@
-﻿using HR.LeaveManagement.Application.Contracts.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartBank.Application.Persistence;
 using SmartBank.Domain.Entities.BaseEntity;
 using SmartBank.Infrastructure.Context;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HR.LeaveManagement.Persistence.Repositories
+namespace SmartBank.Infrastructure.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
