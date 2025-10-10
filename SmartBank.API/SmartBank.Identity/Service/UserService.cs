@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using SmartBank.Application.Identity;
-using SmartBank.Identity.Models;
 using SmartBank.Shared.Dtos;
+using SmartBank.Shared.Models;
 
 
 

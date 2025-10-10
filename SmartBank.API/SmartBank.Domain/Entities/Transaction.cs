@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using SmartBank.Domain.Enums;
+﻿using SmartBank.Domain.Enums;
+using SmartBank.Shared.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartBank.Domain.Entities
 {
@@ -11,10 +12,13 @@ namespace SmartBank.Domain.Entities
         public TransactionType TransactionType { get; set; } 
         public string Description { get; set; } = string.Empty;
         public DateTime TransactionDate { get; set; }
+        [ForeignKey(nameof(FromAccountId))]
 
-        public Guid? FromAccountId { get; set; }
-
+        public Guid FromAccountId { get; set; }
+        public ApplicationUser FromAccount { get; set; }
+        [ForeignKey(nameof(ToAccountId))]
         public Guid? ToAccountId { get; set; }
+        public ApplicationUser ToAccount { get; set; }
 
     }
 }
