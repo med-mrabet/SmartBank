@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using FluentValidation;
+using Mapster;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SmartBank.Application.Persistence;
@@ -12,6 +13,7 @@ namespace SmartBank.Application
         {
             services.AddMapster();
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             return services;
         }

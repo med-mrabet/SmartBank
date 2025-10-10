@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using SmartBank.Application.Features.User.RegisterUserCommand;
 using SmartBank.Application.Identity;
 using SmartBank.Shared.Dtos;
 

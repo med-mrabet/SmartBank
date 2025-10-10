@@ -1,4 +1,7 @@
-﻿namespace SmartBank.Shared.Dtos
+﻿using SmartBank.Shared.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SmartBank.Shared.Dtos
 {
     public class LoginDto
     {
