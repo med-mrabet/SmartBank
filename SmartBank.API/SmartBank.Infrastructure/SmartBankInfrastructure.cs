@@ -53,6 +53,7 @@ public static class SmartBankInfrastructure
             options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
         });
 
+        services.AddScoped<IAccountRepository, AccountRepository>();
         return services;
     }
 }

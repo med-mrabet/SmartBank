@@ -1,12 +1,13 @@
 ﻿namespace SmartBank.Shared.Dtos
 {
-    public class AccountDto
+    public class GetAccountDto
     {
         public string AccountType { get; set; } = string.Empty;
         public decimal Balance { get; set; }
         public string Currency { get; set; } = string.Empty;
+        public AccountStatusDto AccountStatus { get; set; }
+        public DateTime CreatedDate { get; set; }
         public Guid UserId { get; set; }
-
-        public AccountStatusDto Status { get; set; }
+        public UserDto User { get; set; }
     }
 }

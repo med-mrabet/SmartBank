@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartBank.Application.Features.Account.Commands.AddAccount
+namespace SmartBank.Application.Features.User.Account.Commands.AddAccount
 {
     public class AddAccountCommandValidator : AbstractValidator<AddAccountCommand>
     {

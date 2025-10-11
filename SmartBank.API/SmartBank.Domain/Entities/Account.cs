@@ -1,4 +1,5 @@
 ﻿
+using SmartBank.Domain.Enums;
 using SmartBank.Shared.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,6 +13,8 @@ namespace SmartBank.Domain.Entities
         [ForeignKey(nameof(UserId))]
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
+
+        public AccountStatus Status { get; set; }
 
     }
 }

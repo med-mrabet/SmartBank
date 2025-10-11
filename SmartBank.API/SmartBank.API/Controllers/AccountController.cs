@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SmartBank.Application.Features.Account.Commands.AddAccount;
+using SmartBank.Application.Features.User.Account.Commands.AddAccount;
 using SmartBank.Shared.Dtos;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,9 +14,12 @@ namespace SmartBank.API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IMediator mediator;
-        public AccountController(IMediator mediator)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public AccountController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             this.mediator = mediator;
+            _httpContextAccessor = httpContextAccessor;
         }
         // GET: api/<AccountController>
         [HttpGet]
@@ -32,10 +37,12 @@ namespace SmartBank.API.Controllers
 
         // POST api/<AccountController>
         [HttpPost]
+        [Authorize(Roles ="User" , Policy ="UserOnly")]
         public async Task<bool> Post([FromBody] AccountDto account)
         {
             try
             {
+                var claims = _httpContextAccessor.HttpContext.User.Claims.Where(c=>c.Type =="uid").FirstOrDefault().Value;
                 var command = new AddAccountCommand(account);
                 var res = await mediator.Send(command);
                 return true;

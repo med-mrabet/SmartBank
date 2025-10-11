@@ -2,7 +2,7 @@
 using SmartBank.Shared.Dtos;
 
 
-namespace SmartBank.Application.Features.Account.Commands.AddAccount
+namespace SmartBank.Application.Features.User.Account.Commands.AddAccount
 {
     public record AddAccountCommand(AccountDto account) : IRequest<bool>
     {
