@@ -1,4 +1,5 @@
 ﻿using SmartBank.Shared.Dtos;
+using SmartBank.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace SmartBank.Application.Identity
     {
 
         Task<Boolean> RegisterCustomer(RegisterUser user);
+        Task<ApplicationUser?> ExistByIdAsync(Guid userId);
 
     }
 }

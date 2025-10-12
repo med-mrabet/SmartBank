@@ -10,6 +10,7 @@ namespace SmartBank.Domain.Enums
     {
         ACTIVE = 0,
         FREEZED = 1,
-        CLOSED = 2
+        CLOSED = 2,
+        PENDING = 3
     }
 }

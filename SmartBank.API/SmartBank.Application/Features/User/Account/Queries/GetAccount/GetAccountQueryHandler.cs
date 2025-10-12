@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using SmartBank.Application.Persistence;
 using SmartBank.Shared.Dtos;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,20 @@ namespace SmartBank.Application.Features.User.Account.Queries.GetAccount
 {
     public class GetAccountQueryHandler : IRequestHandler<GetAccountQuery, GetAccountDto>
     {
-        public Task<GetAccountDto> Handle(GetAccountQuery request, CancellationToken cancellationToken)
+        private readonly IAccountRepository _accountRepository;
+        public GetAccountQueryHandler(IAccountRepository accountRepository)
         {
-            throw new NotImplementedException();
+            _accountRepository = accountRepository;
+        }
+        public async Task<GetAccountDto> Handle(GetAccountQuery request, CancellationToken cancellationToken)
+        {
+            var account = await _accountRepository.GetByIdAsync(request.accountId);
+            if (account == null)
+            {
+                throw new Exception("User does not have account");
+            }
+            var accountDto = account.Adapt<GetAccountDto>();
+            return accountDto;
         }
     }
 }

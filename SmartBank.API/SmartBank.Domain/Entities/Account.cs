@@ -7,7 +7,7 @@ namespace SmartBank.Domain.Entities
 {
     public class Account : BaseEntity.BaseEntity
     {
-        public string AccountType { get; set; } = string.Empty;
+        public AccountType AccountType { get; set; } 
         public decimal Balance { get; set; } 
         public string Currency { get; set; } = string.Empty;
         [ForeignKey(nameof(UserId))]
@@ -15,6 +15,7 @@ namespace SmartBank.Domain.Entities
         public ApplicationUser User { get; set; }
 
         public AccountStatus Status { get; set; }
+        public string? ActionName { get; set; }
 
     }
 }

@@ -54,6 +54,7 @@ public static class SmartBankInfrastructure
         });
 
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
         return services;
     }
 }

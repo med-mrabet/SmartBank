@@ -1,18 +1,25 @@
-﻿using MediatR;
+﻿using Mapster;
+using MediatR;
+using SmartBank.Application.Persistence;
 using SmartBank.Shared.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SmartBank.Application.Features.User.Account.Queries.GetAccounts
 {
     public class GetAccountsQueryHandler : IRequestHandler<GetAccountsQuery, List<GetAccountDto>>
     {
-        public Task<List<GetAccountDto>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+        private readonly IAccountRepository _accountRepository;
+
+        public GetAccountsQueryHandler(IAccountRepository accountRepository)
         {
-            throw new NotImplementedException();
+            _accountRepository = accountRepository;
+        }
+
+        public async Task<List<GetAccountDto>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+        {
+            var accounts = await _accountRepository.FindByCreterieAsync(p=>p.UserId == request.UserId);
+            var accountsDtos = accounts.Adapt<List<GetAccountDto>>();
+            return accountsDtos;
         }
     }
 }

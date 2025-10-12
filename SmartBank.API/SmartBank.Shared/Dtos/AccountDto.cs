@@ -2,11 +2,11 @@
 {
     public class AccountDto
     {
-        public string AccountType { get; set; } = string.Empty;
+        public AccountTypeDto AccountType { get; set; }
         public decimal Balance { get; set; }
         public string Currency { get; set; } = string.Empty;
-        public Guid UserId { get; set; }
-
         public AccountStatusDto Status { get; set; }
+
+        public string? ActionName { get; set; }
     }
 }

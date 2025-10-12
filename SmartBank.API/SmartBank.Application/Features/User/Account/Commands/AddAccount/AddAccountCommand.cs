@@ -4,7 +4,7 @@ using SmartBank.Shared.Dtos;
 
 namespace SmartBank.Application.Features.User.Account.Commands.AddAccount
 {
-    public record AddAccountCommand(AccountDto account) : IRequest<bool>
+    public record AddAccountCommand(AccountDto account,Guid userId) : IRequest<bool>
     {
     }
 }

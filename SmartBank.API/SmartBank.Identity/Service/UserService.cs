@@ -19,6 +19,13 @@ namespace SmartBank.Identity.Service
             _contextAccessor = contextAccessor;
         }
 
+        public async Task<ApplicationUser?> ExistByIdAsync(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            return user;
+
+        }
+
         public async Task<Boolean> RegisterCustomer(RegisterUser user)
         {
             try

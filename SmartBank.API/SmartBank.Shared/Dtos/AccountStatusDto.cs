@@ -3,7 +3,8 @@
     public enum AccountStatusDto
     {
         ACTIVE = 0,
-        FREEZES = 1,
+        FREEZED = 1,
         CLOSED = 2,
+        PENDING = 3
     }
 }

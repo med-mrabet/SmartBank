@@ -15,10 +15,10 @@ namespace SmartBank.Domain.Entities
         [ForeignKey(nameof(FromAccountId))]
 
         public Guid FromAccountId { get; set; }
-        public ApplicationUser FromAccount { get; set; }
+        public Account FromAccount { get; set; }
         [ForeignKey(nameof(ToAccountId))]
         public Guid? ToAccountId { get; set; }
-        public ApplicationUser ToAccount { get; set; }
+        public Account ToAccount { get; set; }
 
     }
 }

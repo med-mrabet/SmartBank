@@ -26,25 +26,25 @@ namespace SmartBank.Infrastructure.Context
             // Apply all configurations from the current assembly
             modelBuilder.Entity<Account>().HasKey(a => a.Id);
             modelBuilder.Entity<Transaction>().HasKey(a => a.Id);
-            modelBuilder.Entity<Account>()
-        .HasOne(a => a.User) // The navigation property in Account
-        .WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
-        .HasForeignKey(a => a.UserId);
+ //           modelBuilder.Entity<Account>()
+ //       .HasOne(a => a.User) // The navigation property in Account
+ //       .WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
+ //       .HasForeignKey(a => a.UserId);
 
-            modelBuilder.Entity<Notification>()
-        .HasOne(a => a.User) // The navigation property in Account
-        .WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
-        .HasForeignKey(a => a.UserId);
+ //           modelBuilder.Entity<Notification>()
+ //       .HasOne(a => a.User) // The navigation property in Account
+ //       .WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
+ //       .HasForeignKey(a => a.UserId);
 
-            modelBuilder.Entity<Transaction>()
-        .HasOne(a => a.FromAccount) // The navigation property in Account
-        .WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
-        .HasForeignKey(a => a.FromAccountId);
+ //           modelBuilder.Entity<Transaction>()
+ //       .HasOne(a => a.FromAccount) // The navigation property in Account
+ //       .WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
+ //       .HasForeignKey(a => a.FromAccountId);
 
-            modelBuilder.Entity<Transaction>()
- .HasOne(a => a.ToAccount) // The navigation property in Account
- .WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
- .HasForeignKey(a => a.ToAccountId);
+ //           modelBuilder.Entity<Transaction>()
+ //.HasOne(a => a.ToAccount) // The navigation property in Account
+ //.WithMany() // Assuming the ApplicationUser doesn't have a navigation property back to Account
+ //.HasForeignKey(a => a.ToAccountId);
 
 
             modelBuilder.Entity<ApplicationRole>(b =>
@@ -69,25 +69,25 @@ namespace SmartBank.Infrastructure.Context
                 // Each User can have many UserClaims
                 b.Property<Guid>("Id");
 
-                b.HasMany<Account>()
-                 .WithOne()
-                 .HasForeignKey(uc => uc.UserId)
-                 .IsRequired().OnDelete(DeleteBehavior.Restrict); ;
+            //    b.HasMany<Account>()
+            //     .WithOne()
+            //     .HasForeignKey(uc => uc.UserId)
+            //     .IsRequired().OnDelete(DeleteBehavior.Restrict); ;
 
-                b.HasMany<Notification>()
-                .WithOne()
-                .HasForeignKey(uc => uc.UserId)
-                .IsRequired().OnDelete(DeleteBehavior.Restrict); ;
+            //    b.HasMany<Notification>()
+            //    .WithOne()
+            //    .HasForeignKey(uc => uc.UserId)
+            //    .IsRequired().OnDelete(DeleteBehavior.Restrict); ;
 
-                b.HasMany<Transaction>()
-               .WithOne()
-               .HasForeignKey(uc => uc.FromAccountId)
-               .IsRequired().OnDelete(DeleteBehavior.Restrict); ;
+            //    b.HasMany<Transaction>()
+            //   .WithOne()
+            //   .HasForeignKey(uc => uc.FromAccountId)
+            //   .IsRequired().OnDelete(DeleteBehavior.Restrict); ;
 
-                b.HasMany<Transaction>()
-              .WithOne()
-              .HasForeignKey(uc => uc.ToAccountId)
-              .IsRequired().OnDelete(DeleteBehavior.Restrict);
+            //    b.HasMany<Transaction>()
+            //  .WithOne()
+            //  .HasForeignKey(uc => uc.ToAccountId)
+            //  .IsRequired().OnDelete(DeleteBehavior.Restrict);
             });
 
 

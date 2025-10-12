@@ -131,8 +131,10 @@ namespace SmartBank.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AccountType")
-                        .IsRequired()
+                    b.Property<int>("AccountType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ActionName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Balance")
@@ -154,14 +156,9 @@ namespace SmartBank.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Accounts");
                 });
@@ -189,14 +186,9 @@ namespace SmartBank.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Notifications");
                 });
@@ -224,16 +216,10 @@ namespace SmartBank.Infrastructure.Migrations
                     b.Property<Guid>("FromAccountId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FromAccountId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ToAccountId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ToAccountId1")
+                    b.Property<Guid?>("ToAccountId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("TransactionDate")
@@ -249,11 +235,7 @@ namespace SmartBank.Infrastructure.Migrations
 
                     b.HasIndex("FromAccountId");
 
-                    b.HasIndex("FromAccountId1");
-
                     b.HasIndex("ToAccountId");
-
-                    b.HasIndex("ToAccountId1");
 
                     b.ToTable("Transactions");
                 });
@@ -435,15 +417,9 @@ namespace SmartBank.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartBank.Domain.Entities.Account", b =>
                 {
-                    b.HasOne("SmartBank.Shared.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("SmartBank.Shared.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -452,15 +428,9 @@ namespace SmartBank.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartBank.Domain.Entities.Notification", b =>
                 {
-                    b.HasOne("SmartBank.Shared.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("SmartBank.Shared.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -469,29 +439,15 @@ namespace SmartBank.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartBank.Domain.Entities.Transaction", b =>
                 {
-                    b.HasOne("SmartBank.Shared.Models.ApplicationUser", null)
+                    b.HasOne("SmartBank.Domain.Entities.Account", "FromAccount")
                         .WithMany()
                         .HasForeignKey("FromAccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SmartBank.Shared.Models.ApplicationUser", "FromAccount")
-                        .WithMany()
-                        .HasForeignKey("FromAccountId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SmartBank.Shared.Models.ApplicationUser", null)
+                    b.HasOne("SmartBank.Domain.Entities.Account", "ToAccount")
                         .WithMany()
-                        .HasForeignKey("ToAccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SmartBank.Shared.Models.ApplicationUser", "ToAccount")
-                        .WithMany()
-                        .HasForeignKey("ToAccountId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ToAccountId");
 
                     b.Navigation("FromAccount");
 
