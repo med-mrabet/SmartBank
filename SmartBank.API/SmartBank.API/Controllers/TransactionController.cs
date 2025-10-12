@@ -7,6 +7,7 @@ using SmartBank.Application.Features.User.Account.Commands.FreezAccount;
 using SmartBank.Application.Features.User.Account.Queries.GetAccount;
 using SmartBank.Application.Features.User.Account.Queries.GetAccounts;
 using SmartBank.Application.Features.User.Transactions.AddTransaction;
+using SmartBank.Application.Features.User.Transactions.GetTransactions;
 using SmartBank.Shared.Dtos;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -40,7 +41,19 @@ namespace SmartBank.API.Controllers
 
         }
 
-     
+        // POST api/<AccountController>
+        [HttpGet("{accountId}")]
+      //  [Authorize(Roles = "User", Policy = "UserOnly")]
+        public async Task<List<GetTransactionDto>> GetTransactionsHistory(Guid accountId)
+        {
+
+            var command = new GetTransactionCommand(accountId);
+            var res = await mediator.Send(command);
+            return res;
+
+        }
+
+
 
     }
 }
