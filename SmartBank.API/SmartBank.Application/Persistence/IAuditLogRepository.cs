@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace SmartBank.Application.Persistence
 {
-    public interface IAccountRepository :IGenericRepository<Account>
+    public interface IAuditLogRepository :IGenericRepository<AuditLog>
     {
-        public Task BulkUpdateAsync(List<Account> accounts);
+        public Task BulkAddAsync(List<AuditLog> audits);
+
     }
 }

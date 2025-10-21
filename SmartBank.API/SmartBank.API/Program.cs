@@ -1,14 +1,7 @@
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SmartBank.Application;
 using SmartBank.Identity;
 using SmartBank.Infrastructure;
-using SmartBank.Infrastructure.Context;
-using SmartBank.Shared.Models;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +42,7 @@ builder.Services.AddSwaggerGen(options =>
         });
 });
 
+
 var app = builder.Build();
 
 
@@ -63,7 +57,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

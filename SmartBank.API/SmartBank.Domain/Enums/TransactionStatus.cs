@@ -11,6 +11,7 @@ namespace SmartBank.Domain.Enums
        PENDING = 0,
        COMPLETED = 1,
        CANCELED = 2,
-       FAILED = 3
+       FAILED = 3,
+       REJECTED = 4
     }
 }

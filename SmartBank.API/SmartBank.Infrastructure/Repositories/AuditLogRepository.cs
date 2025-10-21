@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace SmartBank.Infrastructure.Repositories
 {
-    public class AccountRepository : GenericRepository<Account>, IAccountRepository
+    public class AuditLogRepository : GenericRepository<AuditLog>, IAuditLogRepository
     {
         private readonly BankSmartContext _bankSmartContext;
-        public AccountRepository(BankSmartContext bankSmartContext) : base(bankSmartContext) 
+
+        public AuditLogRepository(BankSmartContext bankSmartContext) : base(bankSmartContext)
         {
             _bankSmartContext = bankSmartContext;
         }
 
-        public async Task BulkUpdateAsync(List<Account> accounts)
+        public async Task BulkAddAsync(List<AuditLog> audits)
         {
-             _bankSmartContext.Accounts.UpdateRange(accounts);
+            await _bankSmartContext.AuditLogs.AddRangeAsync(audits);
             await _bankSmartContext.SaveChangesAsync();
         }
     }

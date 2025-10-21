@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBank.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using SmartBank.Infrastructure.Context;
 namespace SmartBank.Infrastructure.Migrations
 {
     [DbContext(typeof(BankSmartContext))]
-    partial class BankSmartContextModelSnapshot : ModelSnapshot
+    [Migration("20251015092510_add-auditlog-table")]
+    partial class addauditlogtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

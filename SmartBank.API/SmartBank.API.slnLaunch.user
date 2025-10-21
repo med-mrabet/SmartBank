@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "SmartBank.API\\SmartBank.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ReceiverSignalR\\ReceiverSignalR.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

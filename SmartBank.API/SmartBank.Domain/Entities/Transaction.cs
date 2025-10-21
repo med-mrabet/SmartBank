@@ -8,7 +8,7 @@ namespace SmartBank.Domain.Entities
     {
         public decimal Amount { get; set; }
         public string Currency { get; set; } = string.Empty;
-        public TransactionStatus Status { get; set; } 
+        public TransactionStatus? Status { get; set; } 
         public TransactionType TransactionType { get; set; } 
         public string Description { get; set; } = string.Empty;
         public DateTime TransactionDate { get; set; }

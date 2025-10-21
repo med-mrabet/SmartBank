@@ -9,9 +9,12 @@ namespace SmartBank.Application.Features.User.Account.Commands.FreezAccount
     public class FreezAccountCommandHandler : IRequestHandler<FreezAccountCommand,Boolean>
     {
         private readonly IAccountRepository _accountRepository;
-        public FreezAccountCommandHandler(IAccountRepository accountRepository)
+        private readonly IAuditLogRepository _auditRepository;
+
+        public FreezAccountCommandHandler(IAccountRepository accountRepository, IAuditLogRepository auditRepository)
         {
             _accountRepository = accountRepository;
+            _auditRepository = auditRepository;
         }
 
         public async Task<Boolean> Handle(FreezAccountCommand request, CancellationToken cancellationToken)
@@ -36,6 +39,15 @@ namespace SmartBank.Application.Features.User.Account.Commands.FreezAccount
             accountDto.ActionName = "FREEZ";
             var account = accountDto.Adapt<SmartBank.Domain.Entities.Account>();
             await _accountRepository.UpdateAsync(account);
+            await _auditRepository.AddAsync(new Domain.Entities.AuditLog
+            {
+                Action = "UPDATE",
+                EntityType = nameof(SmartBank.Domain.Entities.Account),
+                IsRead = true,
+                UserId = request.userId,
+                OldValue = $"Account {account.Id} status: {AccountStatusDto.ACTIVE}",
+                NewValue = $"Account {account.Id} status: {AccountStatusDto.PENDING}"
+            });
             return true;
 
         }

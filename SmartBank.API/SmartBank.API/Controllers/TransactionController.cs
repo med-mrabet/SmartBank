@@ -2,10 +2,8 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SmartBank.Application.Features.User.Account.Commands.AddAccount;
-using SmartBank.Application.Features.User.Account.Commands.FreezAccount;
-using SmartBank.Application.Features.User.Account.Queries.GetAccount;
-using SmartBank.Application.Features.User.Account.Queries.GetAccounts;
+using SmartBank.Application.Features.Admin.Transactions.ApproveTransaction;
+using SmartBank.Application.Features.Admin.Transactions.RejectTransaction;
 using SmartBank.Application.Features.User.Transactions.AddTransaction;
 using SmartBank.Application.Features.User.Transactions.GetTransactions;
 using SmartBank.Shared.Dtos;
@@ -14,7 +12,7 @@ using SmartBank.Shared.Dtos;
 
 namespace SmartBank.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class TransactionController : ControllerBase
     {
@@ -43,7 +41,7 @@ namespace SmartBank.API.Controllers
 
         // POST api/<AccountController>
         [HttpGet("{accountId}")]
-      //  [Authorize(Roles = "User", Policy = "UserOnly")]
+        [Authorize(Roles = "User", Policy = "UserOnly")]
         public async Task<List<GetTransactionDto>> GetTransactionsHistory(Guid accountId)
         {
 
@@ -53,7 +51,30 @@ namespace SmartBank.API.Controllers
 
         }
 
+        [HttpGet("{transactionId}")]
+        [Authorize(Roles = "Admin", Policy = "AdminOnly")]
+        public async Task<GetTransactionDto> ApproveTransactions(Guid transactionId)
+        {
+
+            var command = new ApproveTransactionCommand(transactionId);
+            var res = await mediator.Send(command);
+            return res;
+
+        }
+
+        [HttpGet("{transactionId}")]
+        [Authorize(Roles = "Admin", Policy = "AdminOnly")]
+        public async Task<GetTransactionDto> RejectTransactions(Guid transactionId)
+        {
+
+            var command = new RejectTransactionCommand(transactionId);
+            var res = await mediator.Send(command);
+            return res;
+
+        }
+
 
 
     }
+
 }

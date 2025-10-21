@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SmartBank.Application.Features.Admin.Accounts.FreezAccount;
 using SmartBank.Application.Features.User.Account.Commands.AddAccount;
 using SmartBank.Application.Features.User.Account.Commands.FreezAccount;
 using SmartBank.Application.Features.User.Account.Queries.GetAccount;
@@ -75,6 +76,16 @@ namespace SmartBank.API.Controllers
             }
             catch (Exception ex) { }
             return false;
+        }
+
+        [HttpPut("{accountId}")]
+        [Authorize(Roles = "Admin", Policy = "AdminOnly")]
+        public async Task<AccountDto> FreezAccountByAdmin(Guid accountId)
+        {
+                var command = new FreezAccountByAdminCommand(accountId );
+                var res = await mediator.Send(command);
+                return res;
+
         }
 
     }
