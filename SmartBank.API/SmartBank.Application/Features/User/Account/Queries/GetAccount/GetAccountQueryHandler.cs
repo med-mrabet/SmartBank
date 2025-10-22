@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Persistence;
 using SmartBank.Shared.Dtos;
 using System;
@@ -22,7 +23,7 @@ namespace SmartBank.Application.Features.User.Account.Queries.GetAccount
             var account = await _accountRepository.GetByIdAsync(request.accountId);
             if (account == null)
             {
-                throw new Exception("User does not have account");
+                throw new BadRequestException("User does not have account");
             }
             var accountDto = account.Adapt<GetAccountDto>();
             return accountDto;

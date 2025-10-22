@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using SmartBank.API.Middleware;
 using SmartBank.Application;
 using SmartBank.Identity;
 using SmartBank.Infrastructure;
@@ -53,7 +54,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ExceptionsMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

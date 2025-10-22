@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Identity;
 using SmartBank.Application.Persistence;
 using SmartBank.Domain.Entities;
@@ -25,13 +26,13 @@ namespace SmartBank.Application.Features.User.Transactions.AddTransaction
             var user = await _userService.ExistByIdAsync(request.userId);
             if(user == null)
             {
-                throw new Exception("User not found");
+                throw new NotFoundException("User",user.Id);
             }
             var fromAccount = await _accountRepository.GetByIdAsync(request.transaction.FromAccountId);
             var toAccount = await _accountRepository.GetByIdAsync(request.transaction.ToAccountId);
             if (fromAccount.Balance < request.transaction.Amount)
             {
-                throw new Exception("Insufficient balance");
+                throw new BadRequestException("Insufficient balance");
             }
             var isInternalTransaction = await _accountRepository.ExistByCreterieAsync(p=>p.Id == request.transaction.ToAccountId && p.UserId == request.userId);
             var trans = request.transaction.Adapt<Transaction>();

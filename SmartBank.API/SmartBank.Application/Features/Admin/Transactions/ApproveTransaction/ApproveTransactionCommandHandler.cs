@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Persistence;
 using SmartBank.Domain.Entities;
 using SmartBank.Shared.Dtos;
@@ -24,11 +25,11 @@ namespace SmartBank.Application.Features.Admin.Transactions.ApproveTransaction
             var transaction =  await _transactionRepository.GetByIdAsync(request.transactionId);
             if(transaction == null)
             {
-                throw new Exception("Transaction not found");
+                throw new NotFoundException("Transaction",transaction.Id);
             }
             if(transaction.Status != Domain.Enums.TransactionStatus.PENDING)
             {
-                throw new Exception("Transaction is not pending");
+                throw new BadRequestException("Transaction is not pending");
             }
             transaction.Status = Domain.Enums.TransactionStatus.COMPLETED;
             await _transactionRepository.UpdateAsync(transaction);

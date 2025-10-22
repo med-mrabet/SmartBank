@@ -2,7 +2,6 @@
 using Mapster;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using SmartBank.Application.Persistence;
 using System.Reflection;
 
 namespace SmartBank.Application

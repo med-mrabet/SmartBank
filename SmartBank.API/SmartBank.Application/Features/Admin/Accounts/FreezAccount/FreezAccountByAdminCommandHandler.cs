@@ -1,6 +1,8 @@
 ﻿using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Persistence;
+using SmartBank.Domain.Entities;
 using SmartBank.Domain.Enums;
 using SmartBank.Shared.Dtos;
 using System;
@@ -24,11 +26,11 @@ namespace SmartBank.Application.Features.Admin.Accounts.FreezAccount
             var account = await _accountRepository.GetByIdAsync(request.accountId);
             if (account == null)
             {
-                throw new Exception("Account not found");
+                throw new NotFoundException("Account",account.Id);
             }
             if(account.Status == AccountStatus.FREEZED)
             {
-                throw new Exception("Account is already frozen");
+                throw new BadRequestException("Account is already frozen");
             }
             if ((account.ActionName) == "FREEZ")
             {

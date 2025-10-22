@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Persistence;
 using SmartBank.Shared.Dtos;
 
@@ -23,16 +24,16 @@ namespace SmartBank.Application.Features.User.Account.Commands.FreezAccount
             var accountDto = acc.Adapt<AccountDto>();
             if(accountDto.Balance>0)
             {
-                throw new Exception("Account balance must be zero to freeze the account");
+                throw new BadRequestException("Account balance must be zero to freeze the account");
             }
             if (accountDto == null)
             {
-                throw new Exception("Account not found");
+                throw new NotFoundException("Account",acc.FirstOrDefault().Id);
             }
 
             if(accountDto.Status == AccountStatusDto.FREEZED)
             {
-                throw new Exception("Account is already frozen");
+                throw new BadRequestException("Account is already frozen");
             }
 
             accountDto.Status = AccountStatusDto.PENDING;

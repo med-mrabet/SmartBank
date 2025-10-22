@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Persistence;
 using SmartBank.Shared.Dtos;
 
@@ -21,7 +22,7 @@ namespace SmartBank.Application.Features.User.Transactions.GetTransactions
             var isExist = await _accountRepository.ExistByCreterieAsync(p => p.Id == request.accountId);
             if (!isExist)
             {
-                throw new Exception("Account not found");
+                throw new NotFoundException("Account",request.accountId);
             }
 
             var transactions = await _transactionRepository.GetUserTransactionsByAccountIdAsync(request.accountId);

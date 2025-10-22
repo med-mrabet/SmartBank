@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Identity;
 using SmartBank.Application.Persistence;
 using SmartBank.Domain.Entities;
@@ -26,13 +27,13 @@ namespace SmartBank.Application.Features.User.Account.Commands.AddAccount
             var res = _validator.Validate(request);
             if (!res.IsValid) 
             {
-                throw new Exception("Invalid input");
+                throw new BadRequestException("Invalid input");
             }
 
             var user = await _userService.ExistByIdAsync(request.userId);
             if(user == null) 
             {
-                throw new Exception("User not found");
+                throw new NotFoundException("User",user.Id);
             }
 
             

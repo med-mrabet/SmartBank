@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using MediatR;
+using SmartBank.Application.Exceptions;
 using SmartBank.Application.Persistence;
 using SmartBank.Domain.Entities;
 using SmartBank.Domain.Enums;
@@ -32,11 +33,11 @@ namespace SmartBank.Application.Features.Admin.Transactions.RejectTransaction
             var transaction = await _transactionRepository.GetByIdAsync(request.Id);
             if (transaction == null)
             {
-                throw new Exception("Transaction not found");
+                throw new NotFoundException("Transaction",transaction.Id);
             }
             if (transaction.Status != TransactionStatus.PENDING)
             {
-                throw new Exception("Transaction is not pending");
+                throw new BadRequestException("Transaction is not pending");
             }
             transaction.Status = TransactionStatus.REJECTED;
             await _transactionRepository.UpdateAsync(transaction);
